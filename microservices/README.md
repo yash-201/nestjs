@@ -50,3 +50,7 @@ consul
 service registry and discovery tool
 health check for service
 supports service to service discovery
+
+
+<!-- For redis caching  -->
+npm i redis @nestjs/cache-manager cache-manager cache-manager-redis-store

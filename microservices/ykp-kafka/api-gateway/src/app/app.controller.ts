@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ClientKafka } from '@nestjs/microservices';
 import { OnModuleInit } from '@nestjs/common';
@@ -7,7 +7,7 @@ import { OnModuleInit } from '@nestjs/common';
 export class AppController implements OnModuleInit {
   constructor(
     @Inject('NOTIFICATION_SERVICE') private readonly client: ClientKafka,
-    private readonly appService: AppService
+    private readonly appService: AppService,
   ) { }
 
   async onModuleInit() {
@@ -35,6 +35,29 @@ export class AppController implements OnModuleInit {
     } finally {
       await admin.disconnect();
     }
+  }
+
+  // url: /api/products
+  @Get('products')
+  async getProducts() {
+    return this.appService.getProducts();
+  }
+
+  // url: /api/products/:id
+  @Get('products/:id')
+  async getProductById(@Param('id') id: string) {
+    return this.appService.getProductWithCache(id);
+  }
+
+  // url: /api/cache
+  @Get('cache')
+  async getCache() {
+    return this.appService.getCache();
+  }
+
+  @Post('cache')
+  async setCache() {
+    return this.appService.setCache();
   }
 
   // url: /api/register
