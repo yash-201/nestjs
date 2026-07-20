@@ -1,0 +1,18 @@
+_format_version: "3.0"
+
+services:
+  - name: product-service
+    host: product-service-upstream
+    routes:
+      - name: product-routes
+        paths:
+          - /api
+        strip_path: false
+
+upstreams:
+  - name: product-service-upstream
+    targets:
+      - target: product-service-1:3000
+        weight: 100
+      - target: product-service-2:3000
+        weight: 100

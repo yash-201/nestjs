@@ -6,8 +6,6 @@ dist/
 build/
 
 # Environment files
-.env
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -25,3 +23,7 @@ Thumbs.db
 
 # Consul binaries
 microservices/.consul/
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+config.bat
