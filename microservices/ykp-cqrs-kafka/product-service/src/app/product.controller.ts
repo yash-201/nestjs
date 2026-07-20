@@ -21,8 +21,12 @@ export class ProductController {
     }
 
     @Get()
-    async getProducts(@Query() query: GetProductsQuery) {
-        const result = await this.queryBus.execute(query);
-        return { message: 'Products fetched successfully', result };
+    async getProducts(@Query() query: any) {
+        const result = await this.queryBus.execute(new GetProductsQuery(query));
+        return { 
+            message: 'Products fetched successfully', 
+            instance: process.env.INSTANCE_NAME || 'default',
+            result 
+        };
     }
 }

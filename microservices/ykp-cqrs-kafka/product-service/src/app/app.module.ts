@@ -18,7 +18,7 @@ import { GetProductsHandler } from './queries/get-products.handler';
         options: {
           client: {
             clientId: "cqrs-client",
-            brokers: ['localhost:9092'],
+            brokers: (process.env.KAFKA_BROKERS || 'localhost:9092').split(','),
           },
           consumer: {
             groupId: "cqrs-group",
